@@ -9,13 +9,13 @@ public class VRTests {
 				"rand00020",
 				"rand00030",
 				"rand00040",
-//				"rand00050",
-//				"rand00060",
-//				"rand00070",
-//				"rand00080",
-//				"rand00090",
-//				"rand00100",
-//				"rand00200",
+				"rand00050",
+				"rand00060",
+				"rand00070",
+				"rand00080",
+				"rand00090",
+				"rand00100",
+				"rand00200",
 //				"rand00300",
 //				"rand00400",
 //				"rand00500",
@@ -45,7 +45,7 @@ public class VRTests {
 			vrs.clarkWright();
 			// My DUMB solution
 			System.out.printf("%s\t%s\t%d\t%.0f\t%s\n",base,"MINE",vrp.size(),vrs.solutionCost(),vrs.verifySolution());
-			vrs.writeSVG(base+"prob.svg",base+"MYsln.svg");
+			vrs.writeSVG(base+"prob.svg",base+"MINE.svg");
 			
 			// The clever solution
 			if (new File(base+"cwsn.csv").exists()){

@@ -11,8 +11,8 @@ public class Experiment {
 				"rand00200",
 				"rand00300",
 				"rand00400",
-//				"rand00500",
-//				"rand00600"
+				"rand00500",
+				
 				};
 		
 		// Times how long it takes to solve each problem.
@@ -23,7 +23,7 @@ public class Experiment {
 			timing = new ArrayList<Long>();
 			VRProblem vrp = new VRProblem(f+"prob.csv");
 			VRSolution vrs = new VRSolution(vrp);
-			for(int i=0;i<1;i++){
+			for(int i=0;i<10;i++){
 				long start = System.nanoTime();
 				// vrs.oneRoutePerCustomerSolution();
 				vrs.clarkWright();
@@ -31,7 +31,7 @@ public class Experiment {
 				timing.add(t);
 				totTime += t/1000000;
 			}
-			vrs.writeOut(f+"MINE.csv");
+			//vrs.writeOut(f+"MINE.csv");
 			System.out.printf("%s , \t%d , \t%f , \t%d,\t%d \t%s\n",
 					f,vrp.size(), vrs.solutionCost(),totTime, totTime / 50, timing);
 		}
