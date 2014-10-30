@@ -20,10 +20,12 @@ public class Experiment {
 		
 		for (String f:probs){
 			long totTime = 0;
+			int iters = 20;
 			timing = new ArrayList<Long>();
 			VRProblem vrp = new VRProblem(f+"prob.csv");
 			VRSolution vrs = new VRSolution(vrp);
-			for(int i=0;i<1;i++){
+			
+			for(int i = 0; i < iters; i++){
 				long start = System.nanoTime();
 				// vrs.oneRoutePerCustomerSolution();
 				vrs.clarkWright();
@@ -33,7 +35,7 @@ public class Experiment {
 			}
 			vrs.writeOut(f+"MINE.csv");
 			System.out.printf("%s , \t%d , \t%f , \t%d,\t%d \t%s\n",
-					f,vrp.size(), vrs.solutionCost(),totTime, totTime / 50, timing);
+					f,vrp.size(), vrs.solutionCost(),totTime, totTime / iters, timing);
 		}
 	}
 }
