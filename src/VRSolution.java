@@ -8,9 +8,9 @@ public class VRSolution {
 	
 	//Students should implement another solution
 	public void clarkWright() throws Exception{
-		oneRoutePerCustomerSolution();
+		oneRoutePerCustomerSolution();		// O(n)
 		
-		findAllPairs();
+		findAllPairs();						// O(n^2 / 2)
 		
 		while(savings.size() > 0){
 			Double s = savings.lastKey();
