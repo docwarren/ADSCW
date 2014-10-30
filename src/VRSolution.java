@@ -20,11 +20,29 @@ public class VRSolution {
 				a.addRoute(b);
 				solution.remove(b);
 			}
-			savings.remove(s);
-			findAllPairs();						//  O(n^2/2)
+			reviseSavings(s);			// n log n
 		}
 	}
 	
+	private void reviseSavings(Double s) {
+		Route a = savings.get(s).get(0);
+		Route b = savings.get(s).get(1);
+		HashMap<Double, Integer> toRemove = new HashMap<Double, Integer>();
+		for(Double x: savings.keySet()){
+			if(savings.get(x).get(0) == a || savings.get(x).get(1) == b) {
+				toRemove.put(x, 0);
+				continue;
+			}
+			if(savings.get(x).get(0) == b){
+				ArrayList<Route> pair = new ArrayList<Route>();
+				pair.add(a);
+				pair.add(savings.get(x).get(1));
+				savings.put(x, pair);
+			}
+		}
+		for(Double x: toRemove.keySet()) savings.remove(x);
+	}
+
 	private boolean verifyJoin(Route r1, Route r2) {
 		Boolean result = true;
 		int total = 0;
