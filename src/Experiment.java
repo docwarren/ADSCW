@@ -6,16 +6,11 @@ public class Experiment {
 	public static void main(String[] args)throws Exception{
 		String [] probs = {
 				"rand00010",
-				"rand00100",
-				"rand00200",
-				"rand00300",
-				"rand00400",
-				"rand00500",
-//				"rand00600",
-//				"rand00700",
-//				"rand00800",
-//				"rand00900",
-//				"rand01000",
+				"rand00020",
+				"rand00030",
+				"rand00040",
+				"rand00050",
+				"rand00060",
 				};
 		
 		// Times how long it takes to solve each problem.
@@ -23,7 +18,7 @@ public class Experiment {
 		
 		for (String f:probs){
 			long totTime = 0;
-			int iters = 20;
+			int iters = 50;
 			timing = new ArrayList<Long>();
 			VRProblem vrp = new VRProblem(f+"prob.csv");
 			VRSolution vrs = new VRSolution(vrp);
@@ -33,7 +28,7 @@ public class Experiment {
 				vrs.clarkWright();
 				long t = System.nanoTime()-start;
 				timing.add(t);
-				totTime += t/1000000;
+				totTime += t/1000;
 			}
 			//vrs.writeOut(f+"MINE.csv");
 			System.out.printf("%s , \t%d , \t%f , \t%d,\t%d \t%s\n",
