@@ -5,7 +5,7 @@ public class VRTests {
 
 	public static void main(String[] args)throws Exception {
 		String [] shouldPass = {
-//				"rand00010",
+				"rand00010",
 				"rand00020",
 				"rand00030",
 				"rand00040",
@@ -19,7 +19,7 @@ public class VRTests {
 				"rand00300",
 				"rand00400",
 				"rand00500",
-//				"rand00600",
+				"rand00600",
 //				"rand00700",
 //				"rand00800",
 //				"rand00900",

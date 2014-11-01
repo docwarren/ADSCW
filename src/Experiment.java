@@ -1,17 +1,21 @@
-import java.io.PrintStream;
 import java.util.*;
 public class Experiment {
 	private static ArrayList<Long> timing;
-	private String fileName = "~/Documents/AlgsCW/";
 	HashMap<Integer, Double> times = new HashMap<Integer, Double>();
 	
 	public static void main(String[] args)throws Exception{
 		String [] probs = {
+				"rand00010",
 				"rand00100",
 				"rand00200",
 				"rand00300",
 				"rand00400",
 				"rand00500",
+//				"rand00600",
+//				"rand00700",
+//				"rand00800",
+//				"rand00900",
+//				"rand01000",
 				};
 		
 		// Times how long it takes to solve each problem.

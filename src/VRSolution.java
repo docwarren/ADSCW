@@ -5,24 +5,45 @@ public class VRSolution {
 	public VRProblem problem;
 	public List<Route> solution;
 	public ArrayList<Saving> savings = new ArrayList<Saving>();
+	public ArrayList<Route> joined = new ArrayList<Route>();
 	
 	//Students should implement another solution
 	public void clarkWright() throws Exception{
 		oneRoutePerCustomerSolution();		// O(n)
-		
-		findAllPairs();						// O(n^2 / 2)
+		findAllPairs();
 		
 		while(savings.size() > 0){
-			Saving saving = savings.get(0);
-			Double s = saving.getSaving();
-			Route a = saving.getR1();
-			Route b = saving.getR2();
-			if(verifyJoin(a, b)){
-				a.addRoute(b);
-				solution.remove(b);
+			for(int i = 0; i < savings.size(); i++){
+				Saving saving = savings.get(i);
+				Route a = saving.getR1();
+				Route b = saving.getR2(); 
+				if(!joined.contains(a) && !joined.contains(b)){
+					join(a, b);
+				}
+				else if(!joined.contains(a)){
+					for(Route r: solution){
+						if(r.getStart() == b.getStart()) join(a, r);
+						break;
+					}
+				}
+				else if(!joined.contains(b)){
+					for(Route r: solution){
+						if(r.getEnd() == a.getEnd()) join(r, b);
+						break;
+					}
+				}
+				break;
 			}
-			savings.remove(s);
-			findAllPairs();						//  O(n^2/2)
+			findAllPairs();
+		}
+	}
+	
+	private void join(Route a, Route b){
+		if(verifyJoin(a, b)){
+			a.addRoute(b);
+			joined.add(a);
+			joined.add(b);
+			solution.remove(b);
 		}
 	}
 	
@@ -48,26 +69,21 @@ public class VRSolution {
 
  	public void findAllPairs(){
  		savings.clear();
+ 		joined.clear();
  		for(int j = 0; j < this.solution.size(); j++){
  			for( int i = j + 1; i < this.solution.size(); i++ ){
  				Route a = this.solution.get(j);
  				Route b = this.solution.get(i);
- 				calculateSavings(a, b);
+ 				double sav = calculatePairSaving(a, b);
+ 				double sav2 = calculatePairSaving(b, a);
+ 				if(sav > sav2){
+ 					if(sav > 1 && verifyJoin(a, b)) savings.add( new Saving(sav, a, b) );
+ 				}
+ 				else if(sav2 > 1 && verifyJoin(b, a)) savings.add( new Saving(sav, b, a) );
  			}
  		}
  		savings.sort(new SavingSort());
 	}
- 	
- 	public void calculateSavings(Route a, Route b){
-		double sav = calculatePairSaving(a, b);
-		double sav2 = calculatePairSaving(b, a);
-		if(sav2 > sav){
-			if(sav2 > 0 && verifyJoin(b, a)) savings.add( new Saving(sav2, b, a) );
-		}
- 		else{
-			if(sav > 0 && verifyJoin(a, b)) savings.add( new Saving(sav, a, b) );
-		}
- 	}
 
  	//=================================================================================================================
 	public VRSolution(VRProblem problem){
