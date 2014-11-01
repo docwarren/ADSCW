@@ -1,15 +1,14 @@
-import java.util.ArrayList;
 import java.io.*;
 
 public class VRTests {
 
 	public static void main(String[] args)throws Exception {
 		String [] shouldPass = {
-//				"rand00010",
+				"rand00010",
 				"rand00020",
-//				"rand00030",
-//				"rand00040",
-//				"rand00050",
+				"rand00030",
+				"rand00040",
+				"rand00050",
 //				"rand00060",
 //				"rand00070",
 //				"rand00080",
@@ -17,17 +16,17 @@ public class VRTests {
 //				"rand00100",
 //				"rand00200",
 //				"rand00300",
-//				"rand00400",
-//				"rand00500",
+				"rand00400",
+				"rand00500",
 //				"rand00600",
 //				"rand00700",
 //				"rand00800",
 //				"rand00900",
-//				"rand01000"
+				"rand01000"
 				};
 		String [] shouldFail = {
-//				"fail00002",
-//				"fail00004"
+				"fail00002",
+				"fail00004"
 				};
 		System.out.println("\nShould Pass");
 		System.out.println("Problem     \tSoln\tSize\tCost\tValid");
@@ -42,7 +41,7 @@ public class VRTests {
 			System.out.printf("%s\t%s\t%d\t%.0f\t%s\n",base,"Dumb",vrp.size(),vrs.solutionCost(),vrs.verifySolution());
 			vrs.writeSVG(base+"prob.svg",base+"dmsn.svg");
 			
-			vrs.clarkWright();
+			vrs.nearestPoint();
 			// My DUMB solution
 			System.out.printf("%s\t%s\t%d\t%.0f\t%s\n",base,"MINE",vrp.size(),vrs.solutionCost(),vrs.verifySolution());
 			vrs.writeSVG(base+"prob.svg",base+"MINE.svg");

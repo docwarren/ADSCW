@@ -4,8 +4,7 @@ import java.io.*;
 public class VRSolution {
 	public VRProblem problem;
 	public List<List<Customer>> solution;
-	public TreeMap<Double, int[]> savings = new TreeMap<Double, int[]>();
-	
+	public List<Customer> customers;
 	public VRSolution(VRProblem problem){
 		this.problem = problem;
 	}
@@ -20,90 +19,36 @@ public class VRSolution {
 		}
 	}
 	
-	//Students should implement another solution
-	public void clarkWright(){
-		// get the one route per customer solution
-		oneRoutePerCustomerSolution();		//  O(n)
-		// find all the pairs of routes
-		findAllPairs();						//  O(n^2/2)
-		joinPair();							//  O(n)
+	// New nearest point algorithm
+	public void nearestPoint(){
+		this.solution = new ArrayList<List<Customer>>();
+		this.customers = new ArrayList<Customer>();
 		
-		while(!savings.isEmpty()){
-			findAllPairs();					//  O(n^2/2) --- need to speed up this step
-			// redoPairs();					// O(2n)
-			joinPair();						//  O(n)
+		for(Customer c: this.problem.customers){
+			customers.add(c);
 		}
-	}
-	
-	public void joinPair(){
-		HashMap<List<Customer>, Integer> joined = new HashMap<List<Customer>, Integer>();
-		for(Double i: savings.descendingKeySet()){
-			
-			List<Customer> route1 = solution.get(savings.get(i)[0]);
-			List<Customer> route2 = solution.get(savings.get(i)[1]);
-			if(joined.containsKey(route1) || joined.containsKey(route2)) continue;
-			joined.put(route1, 0);
-			joined.put(route2, 0);
-			route1.addAll(route2);		// ?Faster than looping through each one and adding them? O(n) vs O(1)x
-			// Need to carry on making savings until I've exhausted every possible savings
-			
-			solution.remove(route2);
-			break;
-		}
-	}
-	
-	private boolean verifyPair(int[] pair) {
-		Boolean result = true;
-		int total = 0;
-		for(Customer c:solution.get(pair[0])) total += c.req;
-		for(Customer c:solution.get(pair[1])) total += c.req;
-		if (total > problem.depot.req) {
-			result = false;
-		}
-		return result;
-	}
-
-	public double calculatePairSaving(int[] pair){
-		// Originally had a brute force way
-		// Get the length of the first route O(n)
-		// Get the length of the second route O(n)
-		// Get the length of the 2 routes joined O(n)
-		// Do the math
-		// Then realised I could substantially speed it up by doing it this way.
-		List<Customer> route1 = solution.get(pair[0]); 	// O(1)
-		List<Customer> route2 = solution.get(pair[1]);	// O(1)
-		Customer cus1 = route1.get(route1.size() -1);	// O(1)
-		Customer cus2 = route2.get(0);	// O(1)
-		double bridge = cus1.distance(cus2);	// O(1)
-		double sav1 = cus1.distance(this.problem.depot);	// O(1)
-		double sav2 = cus2.distance(this.problem.depot);	// O(1)
-		return sav1 + sav2 - bridge;	// O(1)
-	}
-	
-	// Find the pairs of routes
- 	public void findAllPairs(){
- 		savings.clear();
-		for(int i = 0; i < this.solution.size(); i++){
-			for(int j = i+1; j < this.solution.size(); j++){
-				int[] pair = {i, j};
-				int[] pair2 = {j, i};
-				calculateSavings(pair, pair2);
+		
+		while(customers.size() > 0){
+			Customer start = customers.get(0);
+			ArrayList<Customer> route = new ArrayList<Customer>();
+			customers.sort(new DistanceSort(start));
+			int total = 0;
+			for(Customer c: customers){
+				if(total + c.req < this.problem.depot.req){
+					total += c.req;
+					route.add(c);
+				}
+				else break;
 			}
+			for(int i = 0; i < route.size(); i ++){
+				customers.remove(0);
+			}
+			solution.add(route);
 		}
 	}
- 	
- 	public void calculateSavings(int[] pair, int[] pair2){
- 	// calculateSavings
-		double sav = calculatePairSaving(pair);
-		double sav2 = calculatePairSaving(pair2);
-		if(sav2 > sav) sav = sav2;
-		if(sav > 0){
-			if(verifyPair(pair)) {
-				savings.put( sav, pair );
-			}
-		}
- 	}
 	
+// Don't touch what is below this line=============================================================================================================
+		
 	//Calculate the total journey
 	public double solutionCost(){
 		double cost = 0;

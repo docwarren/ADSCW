@@ -11,8 +11,8 @@ public class Experiment {
 				"rand00200",
 				"rand00300",
 				"rand00400",
-//				"rand00500",
-//				"rand00600"
+				"rand00500",
+				"rand00600"
 				};
 		
 		// Times how long it takes to solve each problem.
@@ -28,7 +28,7 @@ public class Experiment {
 			for(int i = 0; i < iters; i++){
 				long start = System.nanoTime();
 				// vrs.oneRoutePerCustomerSolution();
-				vrs.clarkWright();
+				vrs.nearestPoint();
 				long t = System.nanoTime()-start;
 				timing.add(t);
 				totTime += t/1000000;
