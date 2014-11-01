@@ -9,20 +9,20 @@ public class VRTests {
 				"rand00030",
 				"rand00040",
 				"rand00050",
-//				"rand00060",
-//				"rand00070",
-//				"rand00080",
-//				"rand00090",
-//				"rand00100",
+				"rand00060",
+				"rand00070",
+				"rand00080",
+				"rand00090",
+				"rand00100",
 //				"rand00200",
 //				"rand00300",
-				"rand00400",
-				"rand00500",
+//				"rand00400",
+//				"rand00500",
 //				"rand00600",
 //				"rand00700",
 //				"rand00800",
 //				"rand00900",
-				"rand01000"
+//				"rand01000"
 				};
 		String [] shouldFail = {
 				"fail00002",
