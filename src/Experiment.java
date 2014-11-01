@@ -12,7 +12,11 @@ public class Experiment {
 				"rand00300",
 				"rand00400",
 				"rand00500",
-				"rand00600"
+				"rand00600",
+				"rand00700",
+				"rand00800",
+				"rand00900",
+				"rand01000"
 				};
 		
 		// Times how long it takes to solve each problem.
