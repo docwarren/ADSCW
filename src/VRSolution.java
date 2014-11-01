@@ -27,23 +27,28 @@ public class VRSolution {
 		for(Customer c: this.problem.customers){
 			customers.add(c);
 		}
+		//customers.remove(0);
+		int count = 0;
+		int load = 0;
+		solution.add(new ArrayList<Customer>());
+		Customer start = customers.get(0);
 		
 		while(customers.size() > 0){
-			Customer start = customers.get(0);
-			ArrayList<Customer> route = new ArrayList<Customer>();
+			ArrayList<Customer> route = (ArrayList<Customer>) solution.get(count);
 			customers.sort(new DistanceSort(start));
-			int total = 0;
-			for(Customer c: customers){
-				if(total + c.req < this.problem.depot.req){
-					total += c.req;
-					route.add(c);
-				}
-				else break;
-			}
-			for(int i = 0; i < route.size(); i ++){
+			
+			if(load + customers.get(0).req < this.problem.depot.req){
+				route.add(customers.get(0));
+				load += customers.get(0).req;
+				start = customers.get(0);
 				customers.remove(0);
 			}
-			solution.add(route);
+			else{
+				count ++;
+				load = 0;
+				start = customers.get(0);
+				solution.add(new ArrayList<Customer>());
+			}
 		}
 	}
 	
