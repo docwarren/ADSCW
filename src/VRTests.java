@@ -7,18 +7,18 @@ public class VRTests {
 		String [] shouldPass = {
 //				"rand00010",
 				"rand00020",
-//				"rand00030",
-//				"rand00040",
-//				"rand00050",
-//				"rand00060",
-//				"rand00070",
-//				"rand00080",
-//				"rand00090",
-//				"rand00100",
-//				"rand00200",
-//				"rand00300",
-//				"rand00400",
-//				"rand00500",
+				"rand00030",
+				"rand00040",
+				"rand00050",
+				"rand00060",
+				"rand00070",
+				"rand00080",
+				"rand00090",
+				"rand00100",
+				"rand00200",
+				"rand00300",
+				"rand00400",
+				"rand00500",
 //				"rand00600",
 //				"rand00700",
 //				"rand00800",
@@ -26,8 +26,8 @@ public class VRTests {
 //				"rand01000"
 				};
 		String [] shouldFail = {
-//				"fail00002",
-//				"fail00004"
+				"fail00002",
+				"fail00004"
 				};
 		System.out.println("\nShould Pass");
 		System.out.println("Problem     \tSoln\tSize\tCost\tValid");

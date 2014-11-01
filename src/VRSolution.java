@@ -4,7 +4,7 @@ import java.io.*;
 public class VRSolution {
 	public VRProblem problem;
 	public List<Route> solution;
-	public TreeMap<Double, List<Route>> savings = new TreeMap<Double, List<Route>>();
+	public ArrayList<Saving> savings = new ArrayList<Saving>();
 	
 	//Students should implement another solution
 	public void clarkWright() throws Exception{
@@ -13,9 +13,10 @@ public class VRSolution {
 		findAllPairs();						// O(n^2 / 2)
 		
 		while(savings.size() > 0){
-			Double s = savings.lastKey();
-			Route a = savings.get(s).get(0);
-			Route b = savings.get(s).get(1);
+			Saving saving = savings.get(0);
+			Double s = saving.getSaving();
+			Route a = saving.getR1();
+			Route b = saving.getR2();
 			if(verifyJoin(a, b)){
 				a.addRoute(b);
 				solution.remove(b);
@@ -54,21 +55,17 @@ public class VRSolution {
  				calculateSavings(a, b);
  			}
  		}
+ 		savings.sort(new SavingSort());
 	}
  	
  	public void calculateSavings(Route a, Route b){
 		double sav = calculatePairSaving(a, b);
 		double sav2 = calculatePairSaving(b, a);
-		ArrayList<Route> pair = new ArrayList<Route>();
-		if(sav2 > sav) {
-			pair.add(b);
-			pair.add(a);
-			if(sav2 > 0 && verifyJoin(b, a)) savings.put( sav2, pair );
+		if(sav2 > sav){
+			if(sav2 > 0 && verifyJoin(b, a)) savings.add( new Saving(sav2, b, a) );
 		}
-		else {
-			pair.add(a);
-			pair.add(b);
-			if(sav > 0 && verifyJoin(a, b)) savings.put( sav, pair );
+ 		else{
+			if(sav > 0 && verifyJoin(a, b)) savings.add( new Saving(sav, a, b) );
 		}
  	}
 
