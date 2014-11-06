@@ -39,24 +39,25 @@ public class VRTests {
 //			vrs.oneRoutePerCustomerSolution();
 //			
 //			// DUMB solution
-//			System.out.printf("%s\t%s\t%d\t%.0f\t%s\n",base,"Dumb",vrp.size(),vrs.solutionCost(),vrs.verifySolution());
-//			vrs.writeSVG(base+"prob.svg",base+"dmsn.svg");
+			vrs.oneRoutePerCustomerSolution();
+			System.out.printf("%s\t%s\t%d\t%.0f\t%s\n",base,"Dumb",vrp.size(),vrs.solutionCost(),vrs.verifySolution());
+			vrs.writeSVG(base+"prob.svg",base+"Dumb.svg");
 			
 			vrs.clarkWright();
 			// My DUMB solution
 			System.out.printf("%s\t%s\t%d\t%.0f\t%s\n",base,"MINE",vrp.size(),vrs.solutionCost(),vrs.verifySolution());
-			vrs.writeSVG(base+"prob.svg",base+"MINE.svg");
+			vrs.writeSVG(base+"prob.svg",base+"MyCW.svg");
 			
 //			// The clever solution
-//			if (new File(base+"cwsn.csv").exists()){
-//				vrs.readIn(base+"cwsn.csv");
-//
-//				//Print out results of costing and verifying the solution
-//				System.out.printf("%s\t%s\t%d\t%.0f\t%s\n",base,"Neil",vrp.size(),vrs.solutionCost(),vrs.verifySolution());
-//				
-//				//Write the SVG file
-//				vrs.writeSVG(base+"prob.svg",base+"cwsn.svg");
-//			}
+			if (new File(base+"cwsn.csv").exists()){
+				vrs.readIn(base+"cwsn.csv");
+
+				//Print out results of costing and verifying the solution
+				System.out.printf("%s\t%s\t%d\t%.0f\t%s\n",base,"Neil",vrp.size(),vrs.solutionCost(),vrs.verifySolution());
+				
+				//Write the SVG file
+				vrs.writeSVG(base+"prob.svg",base+"Neil.svg");
+			}
 			System.out.println("=========================================================");
 		}
 		System.out.println("\nShould Fail");

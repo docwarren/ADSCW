@@ -102,7 +102,7 @@ public class VRSolution {
  	//Calculate the total journey
 	public double solutionCost(){
 		double cost = 0;
-		for(Route route:solution){
+		for(Route route: this.solution){
 			cost += route.getCost();
 		}
 		return cost;
