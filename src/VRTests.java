@@ -41,10 +41,15 @@ public class VRTests {
 //			System.out.printf("%s\t%s\t%d\t%.0f\t%s\n",base,"Dumb",vrp.size(),vrs.solutionCost(),vrs.verifySolution());
 //			vrs.writeSVG(base+"prob.svg",base+"Dumb.svg");
 			
-			vrs.nearestPoint();
-			// My DUMB solution
-			System.out.printf("%s\t%s\t%d\t%.0f\t%s\n",base,"MINE",vrp.size(),vrs.solutionCost(),vrs.verifySolution());
-			vrs.writeSVG(base+"prob.svg",base+"NP2.svg");
+//			vrs.nearestPoint();
+//			// My NP solution
+//			System.out.printf("%s\t%s\t%d\t%.0f\t%s\n",base,"MINE",vrp.size(),vrs.solutionCost(),vrs.verifySolution());
+//			vrs.writeSVG(base+"prob.svg",base+"NP2.svg");
+			
+			vrs.radianAlg();
+			// My NP solution
+			System.out.printf("%s\t%s\t%d\t%.0f\t%s\n",base,"Rad2",vrp.size(),vrs.solutionCost(),vrs.verifySolution());
+			vrs.writeSVG(base+"prob.svg",base+"Rad2.svg");
 			
 			// The clever solution
 //			if (new File(base+"cwsn.csv").exists()){

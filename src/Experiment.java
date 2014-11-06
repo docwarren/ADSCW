@@ -5,12 +5,12 @@ public class Experiment {
 	
 	public static void main(String[] args)throws Exception{
 		String [] probs = {
-				"rand00010",
-				"rand00020",
-				"rand00030",
-				"rand00040",
-				"rand00050",
-				"rand00060"
+				"rand00100",
+				"rand00200",
+				"rand00300",
+				"rand00400",
+				"rand00500",
+				"rand00600"
 				};
 		
 		// Times how long it takes to solve each problem.
@@ -26,12 +26,12 @@ public class Experiment {
 			for(int i = 0; i < iters; i++){
 				long start = System.nanoTime();
 				// vrs.oneRoutePerCustomerSolution();
-				vrs.nearestPoint();
+				vrs.radianAlg();
 				long t = System.nanoTime()-start;
 				timing.add(t);
 				totTime += t/1000;
 			}
-			vrs.writeOut(f+"NP2.csv");
+			vrs.writeOut(f+"Rad2.csv");
 			System.out.printf("%s , \t%d , \t%f , \t%d,\t%d \t%s\n",
 					f,vrp.size(), vrs.solutionCost(),totTime, totTime / iters, timing);
 		}

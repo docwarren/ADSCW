@@ -2,9 +2,13 @@ import java.util.*;
 import java.io.*;
 
 public class VRSolution {
+	
 	public VRProblem problem;
+	public ArrayList<Range> circles;
+	
 	public List<List<Customer>> solution;
 	public List<Customer> customers;
+	
 	public VRSolution(VRProblem problem){
 		this.problem = problem;
 	}
@@ -12,6 +16,7 @@ public class VRSolution {
 	//The dumb solver adds one route per customer
 	public void oneRoutePerCustomerSolution(){
 		this.solution = new ArrayList<List<Customer>>();
+		
 		for(Customer c:problem.customers){
 			ArrayList<Customer> route = new ArrayList<Customer>();
 			route.add(c);
@@ -19,6 +24,65 @@ public class VRSolution {
 		}
 	}
 	
+	// Doing it with angles
+	public void radianAlg(){
+		this.solution = new ArrayList<List<Customer>>();
+		this.circles = new ArrayList<Range>();
+		this.customers = new ArrayList<Customer>();
+		
+		// Get the angles of all of the points
+		for(Customer c: this.problem.customers){
+			c.makeAngle(this.problem.depot);
+			customers.add(c);
+		}		
+		
+		// Get the ranges of the circles you want
+		getRanges();
+		
+		// Sort by range and Angle
+		this.customers.sort(new RangeSort(this.circles));
+		int count = 0;
+		int load = 0;
+		
+		solution.add(new ArrayList<Customer>());
+		
+		while(customers.size() > 0){
+			// Make a new route
+			ArrayList<Customer> route = (ArrayList<Customer>) solution.get(count);
+			
+			// Add customers to it
+			if(load + customers.get(0).req < this.problem.depot.req){
+				route.add(customers.get(0));
+				load += customers.get(0).req;
+				customers.remove(0);
+			}
+			// until capacity is reached, then add it to the solution and make a new route
+			else{
+				count ++;
+				load = 0;
+				solution.add(new ArrayList<Customer>());
+			}
+		}
+		
+	}
+	
+	private void getRanges() {
+		double max = this.customers.get(0).distance(this.problem.depot);
+		double min  = this.customers.get(0).distance(this.problem.depot);;
+		int size = this.customers.size();
+		for(Customer c: this.customers){
+			if(this.problem.depot.distance(c) > max) max = this.problem.depot.distance(c);
+			if(this.problem.depot.distance(c) < min) min = this.problem.depot.distance(c);
+		}
+		double range = (max - min) / (size / 60);
+		if(range == 0.0 || range > max) this.circles.add(new Range(this.problem.depot, min, max));
+		else{
+			for(double i = min; i < max; i += range){
+				this.circles.add(new Range(this.problem.depot, i, i+range));
+			}
+		}
+	}
+
 	// New nearest point algorithm
 	public void nearestPoint(){
 		this.solution = new ArrayList<List<Customer>>();
