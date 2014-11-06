@@ -16,7 +16,7 @@ public class VRSolution {
 			for(int i = 0; i < savings.size(); i++){
 				Saving saving = savings.get(i);
 				Route a = saving.getR1();
-				Route b = saving.getR2(); 
+				Route b = saving.getR2();
 				if(!joined.contains(a) && !joined.contains(b)){
 					join(a, b);
 				}
