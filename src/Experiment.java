@@ -1,22 +1,16 @@
-import java.io.PrintStream;
 import java.util.*;
 public class Experiment {
 	private static ArrayList<Long> timing;
-	private String fileName = "~/Documents/AlgsCW/";
 	HashMap<Integer, Double> times = new HashMap<Integer, Double>();
 	
 	public static void main(String[] args)throws Exception{
 		String [] probs = {
-				"rand00100",
-				"rand00200",
-				"rand00300",
-				"rand00400",
-				"rand00500",
-				"rand00600",
-				"rand00700",
-				"rand00800",
-				"rand00900",
-				"rand01000"
+				"rand00010",
+				"rand00020",
+				"rand00030",
+				"rand00040",
+				"rand00050",
+				"rand00060"
 				};
 		
 		// Times how long it takes to solve each problem.
@@ -35,7 +29,7 @@ public class Experiment {
 				vrs.nearestPoint();
 				long t = System.nanoTime()-start;
 				timing.add(t);
-				totTime += t/1000000;
+				totTime += t/1000;
 			}
 			vrs.writeOut(f+"MINE.csv");
 			System.out.printf("%s , \t%d , \t%f , \t%d,\t%d \t%s\n",
