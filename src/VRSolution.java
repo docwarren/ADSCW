@@ -9,16 +9,17 @@ public class VRSolution {
 	
 	//Students should implement another solution
 	public void clarkWright() throws Exception{
-		oneRoutePerCustomerSolution();		// O(n)
+		oneRoutePerCustomerSolution();		
 		findAllPairs();
 		
 		while(savings.size() > 0){
-			for(int i = 0; i < savings.size(); i++){
+			for(int i = 0; i < savings.size();i++){
 				Saving saving = savings.get(i);
 				Route a = saving.getR1();
 				Route b = saving.getR2();
 				if(!joined.contains(a) && !joined.contains(b)){
 					join(a, b);
+					break;
 				}
 				else if(!joined.contains(a)){
 					for(Route r: solution){
@@ -32,12 +33,21 @@ public class VRSolution {
 						break;
 					}
 				}
-				break;
+				
 			}
 			findAllPairs();
 		}
+		optimise();
 	}
 	
+	private void optimise() {
+		for(Route r: this.solution){
+			Customer s = r.getRoute().get(0);
+			Customer e = r.getRoute().get(r.getRoute().size() - 1);
+			//System.out.println(s.toString() + ": " + e.toString());
+		}
+	}
+
 	private void join(Route a, Route b){
 		if(verifyJoin(a, b)){
 			a.addRoute(b);
@@ -61,10 +71,10 @@ public class VRSolution {
 	public double calculatePairSaving(Route a, Route b){
 		Customer cus1 = a.getEnd();
 		Customer cus2 = b.getStart();
-		double bridge = cus1.distance(cus2);	// O(1)
-		double sav1 = cus1.distance(this.problem.depot);	// O(1)
-		double sav2 = cus2.distance(this.problem.depot);	// O(1)
-		return sav1 + sav2 - bridge;	// O(1)
+		double bridge = cus1.distance(cus2);
+		double sav1 = cus1.distance(this.problem.depot);
+		double sav2 = cus2.distance(this.problem.depot);
+		return sav1 + sav2 - bridge;
 	}
 
  	public void findAllPairs(){

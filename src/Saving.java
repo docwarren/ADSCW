@@ -33,6 +33,11 @@ public class Saving {
 	public void setR2(Route r2) {
 		this.r2 = r2;
 	}
+
+	@Override
+	public String toString() {
+		return "Saving :" + this.saving;
+	}
 	
 	
 }

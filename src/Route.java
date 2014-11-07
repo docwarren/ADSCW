@@ -50,6 +50,7 @@ public class Route {
 	
 	public void addRoute(Route toAdd){
 		this.route.addAll(toAdd.getRoute());
+		this.end = this.route.get(this.route.size() -1 );
 	}
 	
 	public void addCustomer(Customer c){

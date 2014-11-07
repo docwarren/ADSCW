@@ -17,9 +17,9 @@ public class VRTests {
 				"rand00100",
 				"rand00200",
 				"rand00300",
-				"rand00400",
-				"rand00500",
-				"rand00600",
+//				"rand00400",
+//				"rand00500",
+//				"rand00600",
 //				"rand00700",
 //				"rand00800",
 //				"rand00900",
@@ -39,9 +39,9 @@ public class VRTests {
 //			vrs.oneRoutePerCustomerSolution();
 //			
 //			// DUMB solution
-			vrs.oneRoutePerCustomerSolution();
-			System.out.printf("%s\t%s\t%d\t%.0f\t%s\n",base,"Dumb",vrp.size(),vrs.solutionCost(),vrs.verifySolution());
-			vrs.writeSVG(base+"prob.svg",base+"Dumb.svg");
+//			vrs.oneRoutePerCustomerSolution();
+//			System.out.printf("%s\t%s\t%d\t%.0f\t%s\n",base,"Dumb",vrp.size(),vrs.solutionCost(),vrs.verifySolution());
+//			vrs.writeSVG(base+"prob.svg",base+"Dumb.svg");
 			
 			vrs.clarkWright();
 			// My DUMB solution
@@ -56,7 +56,7 @@ public class VRTests {
 				System.out.printf("%s\t%s\t%d\t%.0f\t%s\n",base,"Neil",vrp.size(),vrs.solutionCost(),vrs.verifySolution());
 				
 				//Write the SVG file
-				vrs.writeSVG(base+"prob.svg",base+"Neil.svg");
+				//vrs.writeSVG(base+"prob.svg",base+"Neil.svg");
 			}
 			System.out.println("=========================================================");
 		}

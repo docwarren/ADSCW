@@ -30,9 +30,9 @@ public class Experiment {
 				timing.add(t);
 				totTime += t/1000;
 			}
-			//vrs.writeOut(f+"MINE.csv");
-			System.out.printf("%s , \t%d , \t%f , \t%d,\t%d \t%s\n",
-					f,vrp.size(), vrs.solutionCost(),totTime, totTime / iters, timing);
+			vrs.writeOut(f+"MINE.csv");
+			System.out.printf("%s , \t%d , \t%f , \t%d,\t%d \n",
+					f,vrp.size(), vrs.solutionCost(),totTime, totTime / iters);
 		}
 	}
 }
