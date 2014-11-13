@@ -48,8 +48,9 @@ public class VRTests {
 			
 			vrs.radianAlg();
 			// My NP solution
-			System.out.printf("%s\t%s\t%d\t%.0f\t%s\n",base,"Rad2",vrp.size(),vrs.solutionCost(),vrs.verifySolution());
+			//System.out.printf("%s\t%s\t%d\t%.0f\t%s\n",base,"Rad2",vrp.size(),vrs.solutionCost(),vrs.verifySolution());
 			vrs.writeSVG(base+"prob.svg",base+"Rad2.svg");
+			System.out.println(vrs.solutionCost());
 			
 			// The clever solution
 //			if (new File(base+"cwsn.csv").exists()){
@@ -61,7 +62,7 @@ public class VRTests {
 //				//Write the SVG file
 //				vrs.writeSVG(base+"prob.svg",base+"cwsn.svg");
 //			}
-			System.out.println("=========================================================");
+			//System.out.println("=========================================================");
 		}
 		System.out.println("\nShould Fail");
 		System.out.println("Problem\tSolution\tSize\tCost\tValid");
