@@ -56,7 +56,7 @@ public class VRTests {
 //				//Write the SVG file
 //				vrs.writeSVG(base+"prob.svg",base+"cwsn.svg");
 //			}
-			System.out.println("=========================================================");
+			//System.out.println("=========================================================");
 		}
 		System.out.println("\nShould Fail");
 		System.out.println("Problem\tSolution\tSize\tCost\tValid");
