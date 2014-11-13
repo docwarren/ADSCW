@@ -5,18 +5,18 @@ public class Experiment {
 	
 	public static void main(String[] args)throws Exception{
 		String [] probs = {
-				"rand00010",
-				"rand00020",
-				"rand00030",
-				"rand00040",
-				"rand00050",
-				"rand00060",
-				"rand00070",
-				"rand00080",
-				"rand00090",
-				"rand00100",
-				"rand00200",
-				"rand00300",
+//				"rand00010",
+//				"rand00020",
+//				"rand00030",
+//				"rand00040",
+//				"rand00050",
+//				"rand00060",
+//				"rand00070",
+//				"rand00080",
+//				"rand00090",
+//				"rand00100",
+//				"rand00200",
+//				"rand00300",
 				"rand00400",
 				"rand00500",
 				"rand00600",
@@ -31,7 +31,7 @@ public class Experiment {
 		
 		for (String f:probs){
 			long totTime = 0;
-			int iters = 50;
+			int iters = 10;
 			timing = new ArrayList<Long>();
 			VRProblem vrp = new VRProblem(f+"prob.csv");
 			VRSolution vrs = new VRSolution(vrp);
@@ -39,12 +39,13 @@ public class Experiment {
 			for(int i = 0; i < iters; i++){
 				long start = System.nanoTime();
 				// vrs.oneRoutePerCustomerSolution();
-				vrs.radianAlg();
+				//vrs.radianAlg();
+				vrs.nearestPoint();
 				long t = System.nanoTime()-start;
 				timing.add(t);
 				totTime += t/1000;
 			}
-			vrs.writeOut(f+"Rad2.csv");
+			vrs.writeOut(f+"NP.csv");
 //			System.out.printf("%s , \t%d , \t%f , \t%d,\t%d \t%s\n",
 //					f,vrp.size(), vrs.solutionCost(),totTime, totTime / iters, timing);
 			System.out.println(totTime / iters);

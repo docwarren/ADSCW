@@ -9,6 +9,7 @@ public class VRSolution {
 	public List<List<Customer>> solution;
 	public List<Customer> customers;
 	
+	// Constructor
 	public VRSolution(VRProblem problem){
 		this.problem = problem;
 	}
@@ -46,6 +47,7 @@ public class VRSolution {
 		
 		solution.add(new ArrayList<Customer>());
 		
+		// Add the customers to the solution one at a time
 		while(customers.size() > 0){
 			// Make a new route
 			ArrayList<Customer> route = (ArrayList<Customer>) solution.get(count);
@@ -63,24 +65,7 @@ public class VRSolution {
 				solution.add(new ArrayList<Customer>());
 			}
 		}
-		
-	}
-	
-	private void getRanges() {
-		double max = this.customers.get(0).distance(this.problem.depot);
-		double min  = this.customers.get(0).distance(this.problem.depot);;
-		int size = this.customers.size();
-		for(Customer c: this.customers){
-			if(this.problem.depot.distance(c) > max) max = this.problem.depot.distance(c);
-			if(this.problem.depot.distance(c) < min) min = this.problem.depot.distance(c);
-		}
-		double range = (max - min) / (size / 60);
-		if(range == 0.0 || range > max) this.circles.add(new Range(this.problem.depot, min, max));
-		else{
-			for(double i = min; i < max; i += range){
-				this.circles.add(new Range(this.problem.depot, i, i+range));
-			}
-		}
+		randomise();
 	}
 
 	// New nearest point algorithm
@@ -113,6 +98,43 @@ public class VRSolution {
 				start = customers.get(0);
 				solution.add(new ArrayList<Customer>());
 			}
+		}
+		randomise();
+	}
+	
+	private void getRanges() {
+		double max = this.customers.get(0).distance(this.problem.depot);
+		double min  = this.customers.get(0).distance(this.problem.depot);;
+		int size = this.customers.size();
+		for(Customer c: this.customers){
+			if(this.problem.depot.distance(c) > max) max = this.problem.depot.distance(c);
+			if(this.problem.depot.distance(c) < min) min = this.problem.depot.distance(c);
+		}
+		double range = (max - min) / (size / 60);
+		if(range == 0.0 || range > max) this.circles.add(new Range(this.problem.depot, min, max));
+		else{
+			for(double i = min; i < max; i += range){
+				this.circles.add(new Range(this.problem.depot, i, i+range));
+			}
+		}
+	}
+	
+	public void randomise(){
+		for(List<Customer> r: solution){
+			// Create a temporary route with the same customers in it ( not a pointer to the original )
+			List<Customer> best = new ArrayList<Customer>();
+			List<Customer> mix = new ArrayList<Customer>();
+			for(Customer c: r) best.add(c);
+			for(Customer c: best) mix.add(c);
+			for(int i = 0; i < 10000; i++){
+				mix.sort(new RandomSort());
+				if(routeCost(mix) < routeCost(best)){
+					best.clear();
+					for(Customer c: mix) best.add(c);	// Avoid pointing to mix ( which will be randomised in future )
+				}
+			}
+			r.clear();
+			for(Customer c: best) r.add(c);
 		}
 	}
 	
