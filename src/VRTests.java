@@ -10,20 +10,20 @@ public class VRTests {
 				"rand00030",
 				"rand00040",
 				"rand00050",
-//				"rand00060",
-//				"rand00070",
-//				"rand00080",
-//				"rand00090",
-//				"rand00100",
-//				"rand00200",
-//				"rand00300",
-//				"rand00400",
-//				"rand00500",
-//				"rand00600",
-//				"rand00700",
-//				"rand00800",
-//				"rand00900",
-//				"rand01000"
+				"rand00060",
+				"rand00070",
+				"rand00080",
+				"rand00090",
+				"rand00100",
+				"rand00200",
+				"rand00300",
+				"rand00400",
+				"rand00500",
+				"rand00600",
+				"rand00700",
+				"rand00800",
+				"rand00900",
+				"rand01000"
 				};
 		String [] shouldFail = {
 				"fail00002",
@@ -39,26 +39,27 @@ public class VRTests {
 //			vrs.oneRoutePerCustomerSolution();
 //			
 //			// DUMB solution
-			vrs.oneRoutePerCustomerSolution();
-			System.out.printf("%s\t%s\t%d\t%.0f\t%s\n",base,"Dumb",vrp.size(),vrs.solutionCost(),vrs.verifySolution());
-			vrs.writeSVG(base+"prob.svg",base+"Dumb.svg");
+//			vrs.oneRoutePerCustomerSolution();
+//			System.out.printf("%s\t%s\t%d\t%.0f\t%s\n",base,"Dumb",vrp.size(),vrs.solutionCost(),vrs.verifySolution());
+//			vrs.writeSVG(base+"prob.svg",base+"Dumb.svg");
 			
 			vrs.clarkWright();
 			// My DUMB solution
-			System.out.printf("%s\t%s\t%d\t%.0f\t%s\n",base,"MINE",vrp.size(),vrs.solutionCost(),vrs.verifySolution());
+			System.out.println(vrs.solutionCost());
+			// System.out.printf("%s\t%s\t%d\t%.0f\t%s\n",base,"MINE",vrp.size(),vrs.solutionCost(),vrs.verifySolution());
 			vrs.writeSVG(base+"prob.svg",base+"MyCW.svg");
 			
 //			// The clever solution
-			if (new File(base+"cwsn.csv").exists()){
-				vrs.readIn(base+"cwsn.csv");
-
-				//Print out results of costing and verifying the solution
-				System.out.printf("%s\t%s\t%d\t%.0f\t%s\n",base,"Neil",vrp.size(),vrs.solutionCost(),vrs.verifySolution());
-				
-				//Write the SVG file
-				//vrs.writeSVG(base+"prob.svg",base+"Neil.svg");
-			}
-			System.out.println("=========================================================");
+//			if (new File(base+"cwsn.csv").exists()){
+//				vrs.readIn(base+"cwsn.csv");
+//
+//				//Print out results of costing and verifying the solution
+//				System.out.printf("%s\t%s\t%d\t%.0f\t%s\n",base,"Neil",vrp.size(),vrs.solutionCost(),vrs.verifySolution());
+//				
+//				//Write the SVG file
+//				//vrs.writeSVG(base+"prob.svg",base+"Neil.svg");
+//			}
+//			System.out.println("=========================================================");
 		}
 		System.out.println("\nShould Fail");
 		System.out.println("Problem\tSolution\tSize\tCost\tValid");
