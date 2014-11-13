@@ -10,13 +10,13 @@ public class VRTests {
 				"rand00030",
 				"rand00040",
 				"rand00050",
-				"rand00060",
-				"rand00070",
-				"rand00080",
-				"rand00090",
-				"rand00100",
-				"rand00200",
-				"rand00300",
+//				"rand00060",
+//				"rand00070",
+//				"rand00080",
+//				"rand00090",
+//				"rand00100",
+//				"rand00200",
+//				"rand00300",
 //				"rand00400",
 //				"rand00500",
 //				"rand00600",
@@ -39,9 +39,9 @@ public class VRTests {
 //			vrs.oneRoutePerCustomerSolution();
 //			
 //			// DUMB solution
-//			vrs.oneRoutePerCustomerSolution();
-//			System.out.printf("%s\t%s\t%d\t%.0f\t%s\n",base,"Dumb",vrp.size(),vrs.solutionCost(),vrs.verifySolution());
-//			vrs.writeSVG(base+"prob.svg",base+"Dumb.svg");
+			vrs.oneRoutePerCustomerSolution();
+			System.out.printf("%s\t%s\t%d\t%.0f\t%s\n",base,"Dumb",vrp.size(),vrs.solutionCost(),vrs.verifySolution());
+			vrs.writeSVG(base+"prob.svg",base+"Dumb.svg");
 			
 			vrs.clarkWright();
 			// My DUMB solution

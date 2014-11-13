@@ -46,6 +46,8 @@ public class Route {
 
 	public void setRoute(List<Customer> route) {
 		this.route = route;
+		this.start = route.get(0);
+		this.end = route.get(route.size() - 1);
 	}
 	
 	public void addRoute(Route toAdd){

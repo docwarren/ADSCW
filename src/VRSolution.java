@@ -33,18 +33,28 @@ public class VRSolution {
 						break;
 					}
 				}
-				
 			}
 			findAllPairs();
 		}
-		optimise();
+		randomise();
 	}
 	
-	private void optimise() {
+	public void randomise(){
 		for(Route r: this.solution){
-			Customer s = r.getRoute().get(0);
-			Customer e = r.getRoute().get(r.getRoute().size() - 1);
-			//System.out.println(s.toString() + ": " + e.toString());
+			List<Customer> best = r.getRoute();
+			// Create a temporary route with the same customers in it ( not a pointer to the original )
+			List<Customer> mix = new ArrayList<Customer>();
+			mix.addAll(best);
+			Route ok = new Route(mix.get(0), this.problem.depot);
+			for(int i = 0; i < 10000; i++){
+				mix.sort(new RandomSort());
+				ok.setRoute(mix);
+				if(ok.getCost() < r.getCost()){
+					List<Customer> t = new ArrayList<Customer>();
+					for(Customer c: mix) t.add(c);	// Avoid pointing to mix ( which will be randomised in future )
+					r.setRoute(t);
+				}
+			}
 		}
 	}
 
@@ -102,6 +112,7 @@ public class VRSolution {
 
 	//The dumb solver adds one route per customer
 	public void oneRoutePerCustomerSolution(){
+		this.solution = new ArrayList<Route>();
 		this.solution = new ArrayList<Route>();
 		for(Customer c:problem.customers){
 			Route route = new Route(c, problem.depot);
