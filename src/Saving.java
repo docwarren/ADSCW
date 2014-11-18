@@ -1,4 +1,3 @@
-
 public class Saving {
 	private Double saving;
 	private Route r1;
@@ -38,6 +37,4 @@ public class Saving {
 	public String toString() {
 		return "Saving :" + this.saving;
 	}
-	
-	
 }

@@ -1,7 +1,6 @@
 import java.util.Comparator;
 import java.util.Random;
 
-
 public class RandomSort implements Comparator<Customer>{
 
 	public int compare(Customer a, Customer b) {
@@ -11,5 +10,4 @@ public class RandomSort implements Comparator<Customer>{
 		if(ri >= 5) return -1;
 		return 0;
 	}
-
 }

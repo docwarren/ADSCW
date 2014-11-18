@@ -16,14 +16,14 @@ public class VRTests {
 				"rand00090",
 				"rand00100",
 				"rand00200",
-				"rand00300",
-				"rand00400",
-				"rand00500",
-				"rand00600",
-				"rand00700",
-				"rand00800",
-				"rand00900",
-				"rand01000"
+//				"rand00300",
+//				"rand00400",
+//				"rand00500",
+//				"rand00600",
+//				"rand00700",
+//				"rand00800",
+//				"rand00900",
+//				"rand01000"
 				};
 		String [] shouldFail = {
 				"fail00002",
@@ -39,15 +39,15 @@ public class VRTests {
 //			vrs.oneRoutePerCustomerSolution();
 //			
 //			// DUMB solution
-//			vrs.oneRoutePerCustomerSolution();
-//			System.out.printf("%s\t%s\t%d\t%.0f\t%s\n",base,"Dumb",vrp.size(),vrs.solutionCost(),vrs.verifySolution());
+			vrs.oneRoutePerCustomerSolution();
+			System.out.printf("%.0f\n",vrs.solutionCost());
 //			vrs.writeSVG(base+"prob.svg",base+"Dumb.svg");
 			
-			vrs.clarkWright();
+//			vrs.clarkWright();
 			// My DUMB solution
-			System.out.println(vrs.solutionCost());
+//			System.out.printf("%.0f\n", vrs.solutionCost());
 			// System.out.printf("%s\t%s\t%d\t%.0f\t%s\n",base,"MINE",vrp.size(),vrs.solutionCost(),vrs.verifySolution());
-			vrs.writeSVG(base+"prob.svg",base+"MyCW.svg");
+//			vrs.writeSVG(base+"prob.svg",base+"CWwithSS.svg");
 			
 //			// The clever solution
 //			if (new File(base+"cwsn.csv").exists()){

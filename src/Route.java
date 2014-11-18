@@ -1,20 +1,11 @@
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Route {
 	private Customer start;
 	private Customer end;
 	private List<Customer> route;
 	private Customer depot;
-	
-	public Customer getDepot() {
-		return depot;
-	}
-
-	public void setDepot(Customer depot) {
-		this.depot = depot;
-	}
 
 	public Route(Customer a, Customer dep){
 		this.start = a;
@@ -22,6 +13,14 @@ public class Route {
 		this.route = new ArrayList<Customer>();
 		this.route.add(a);
 		this.depot = dep;
+	}
+	
+	public Customer getDepot() {
+		return depot;
+	}
+
+	public void setDepot(Customer depot) {
+		this.depot = depot;
 	}
 	
 	public Customer getStart() {
@@ -92,5 +91,4 @@ public class Route {
 		}
 		return result;
 	}
-	
 }

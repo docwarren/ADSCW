@@ -7,38 +7,57 @@ public class VRSolution {
 	public ArrayList<Saving> savings = new ArrayList<Saving>();
 	public ArrayList<Route> joined = new ArrayList<Route>();
 	
+	public VRSolution(VRProblem problem){
+		this.problem = problem;
+	}
+	
 	//Students should implement another solution
 	public void clarkWright() throws Exception{
-		oneRoutePerCustomerSolution();		
+		// Assign each customer to a route
+		oneRoutePerCustomerSolution();
+		// Find all the possible route pairs and calculate savings
 		findAllPairs();
 		
+		// While there are savings to be made
 		while(savings.size() > 0){
+			// Loop through all savings and join routes where appropriate
 			for(int i = 0; i < savings.size();i++){
+				// get the 2 routes associated with the saving
 				Saving saving = savings.get(i);
 				Route a = saving.getR1();
 				Route b = saving.getR2();
+				// If the routes have not been joined anywhere before, join them
 				if(!joined.contains(a) && !joined.contains(b)){
 					join(a, b);
 					break;
 				}
+				// Otherwise If the list of joined routes does not contain the left route
+				// then the right route must have been joined before
 				else if(!joined.contains(a)){
+					// Find a route that starts with the same customer as the right route
 					for(Route r: solution){
-						if(r.getStart() == b.getStart()) join(a, r);
+						if(r.getStart() == b.getStart()) join(a, r);		// join it to the left route
 						break;
 					}
 				}
+				// Otherwise if the list of joined routes does not contains the right route
+				// Then it must contain the left one
 				else if(!joined.contains(b)){
+					// Find a route that ends with the same route as the left route
 					for(Route r: solution){
-						if(r.getEnd() == a.getEnd()) join(r, b);
+						if(r.getEnd() == a.getEnd()) join(r, b);	// join it to the right route
 						break;
 					}
 				}
 			}
-			findAllPairs();
+			joined.clear();		// Clear the joined list
+			savings.clear();	// Clear the savings list
+			findAllPairs();		// Recheck for savings
 		}
-		randomise();
+		randomise();		// Perform a simple search on each route
 	}
 	
+	// Simple search algorithm to try to find the best route
 	public void randomise(){
 		for(Route r: this.solution){
 			List<Customer> best = r.getRoute();
@@ -46,10 +65,12 @@ public class VRSolution {
 			List<Customer> mix = new ArrayList<Customer>();
 			mix.addAll(best);
 			Route ok = new Route(mix.get(0), this.problem.depot);
+			// Mix up the route 10000 times and compare each solution to the best current solution
 			for(int i = 0; i < 10000; i++){
-				mix.sort(new RandomSort());
+				mix.sort(new RandomSort());		// randomly mix up the route
 				ok.setRoute(mix);
-				if(ok.getCost() < r.getCost()){
+				// if the jumbled route is better than our current route, use it instead
+				if(ok.getCost() < r.getCost()){		
 					List<Customer> t = new ArrayList<Customer>();
 					for(Customer c: mix) t.add(c);	// Avoid pointing to mix ( which will be randomised in future )
 					r.setRoute(t);
@@ -58,15 +79,17 @@ public class VRSolution {
 		}
 	}
 
+	// Join 2 routes in the solution, checking for exceeding capacity first
 	private void join(Route a, Route b){
-		if(verifyJoin(a, b)){
+		if(verifyJoin(a, b)){		// check that a and b joining will not exceed capacity
 			a.addRoute(b);
-			joined.add(a);
+			joined.add(a);	// add them to the joined list
 			joined.add(b);
 			solution.remove(b);
 		}
 	}
 	
+	// Returns true if the capacity of the van will not be exceeded when the routes are joined
 	private boolean verifyJoin(Route r1, Route r2) {
 		Boolean result = true;
 		int total = 0;
@@ -77,7 +100,8 @@ public class VRSolution {
 		}
 		return result;
 	}
-
+	
+	// Calculate the savings that would occur if two routes were joined
 	public double calculatePairSaving(Route a, Route b){
 		Customer cus1 = a.getEnd();
 		Customer cus2 = b.getStart();
@@ -87,9 +111,8 @@ public class VRSolution {
 		return sav1 + sav2 - bridge;
 	}
 
+	// Find all of the pairs of routes, calculate the savings, and add the savings to the savings list
  	public void findAllPairs(){
- 		savings.clear();
- 		joined.clear();
  		for(int j = 0; j < this.solution.size(); j++){
  			for( int i = j + 1; i < this.solution.size(); i++ ){
  				Route a = this.solution.get(j);
@@ -102,15 +125,10 @@ public class VRSolution {
  				else if(sav2 > 1 && verifyJoin(b, a)) savings.add( new Saving(sav, b, a) );
  			}
  		}
- 		savings.sort(new SavingSort());
+ 		savings.sort(new SavingSort());			// Order them from most savings to least
 	}
 
- 	//=================================================================================================================
-	public VRSolution(VRProblem problem){
-		this.problem = problem;
-	}
-
-	//The dumb solver adds one route per customer
+	//The simple solver adds one route per customer
 	public void oneRoutePerCustomerSolution(){
 		this.solution = new ArrayList<Route>();
 		this.solution = new ArrayList<Route>();

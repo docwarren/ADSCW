@@ -1,6 +1,5 @@
 import java.util.Comparator;
 
-
 public class SavingSort implements Comparator<Saving> {
 
 	@Override
@@ -9,5 +8,4 @@ public class SavingSort implements Comparator<Saving> {
 		else if(a.getSaving() > b.getSaving()) return -1;
 		return 0;
 	}
-
 }
